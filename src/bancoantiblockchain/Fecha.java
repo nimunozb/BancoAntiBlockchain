@@ -20,6 +20,9 @@ private int mes;
         this.mes = mes;
     }
 
+    public Fecha() {
+    }
+
     public int getDia() {
         return dia;
     }

@@ -21,16 +21,14 @@ public class BancoAntiBlockchain {
          Cuenta cuenta2=new Cuenta(2,7,4,100678,800,"Rosa Melcalvo");
          
         
-      cuenta1.getMovimiento().RetirarCuenta(cuenta1.getSaldo(), 350);
-          cuenta1.getMovimiento().RetirarCuenta(cuenta1.getSaldo(), 380);
-           
-        
-        /*    cuenta2.movimiento.consignarCuenta(cuenta2.saldo, 50);
-                cuenta2.movimiento.consignarCuenta(cuenta2.saldo, 50);*/
+      cuenta1.RetirarCuenta(350);
+      cuenta1.RetirarCuenta(380);
+      cuenta2.CogsignarCuenta(50);
+       cuenta2.CogsignarCuenta(505);
                 
                       
          listadoMovimientos(cuenta1);
-         //listadoMovimientos(cuenta2);
+         listadoMovimientos(cuenta2);
     
     
     
@@ -39,7 +37,7 @@ public class BancoAntiBlockchain {
     public static void listadoMovimientos(Cuenta cuenta){
      for (int i = 0; i <40; i++) {
           if (cuenta.getMovimiento().getMovimientosRealizados()[i]!=null){
-              System.out.println("este movimiento se raelizo el dia "+cuenta.getMovimiento().getMovimientosRealizados()[i].metadato.getDia()
+              System.out.println(" numero de cuenta "+cuenta.getNumeroCuenta()+" esta cuenta pertenece a "+cuenta.getCliente()+" ,este movimiento se raelizo el dia "+cuenta.getMovimiento().getMovimientosRealizados()[i].metadato.getDia()
               +" el mes "+cuenta.getMovimiento().getMovimientosRealizados()[i].metadato.getMes()+" el año "+cuenta.getMovimiento().getMovimientosRealizados()[i].metadato.getAno()+
                       " ,codigo de la trasaccion "+cuenta.getMovimiento().getMovimientosRealizados()[i].transaccion.getCodigo()+" por un valor de "+
                          cuenta.getMovimiento().getMovimientosRealizados()[i].valorCantidad);

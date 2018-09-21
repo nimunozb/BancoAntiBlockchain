@@ -10,23 +10,22 @@ package bancoantiblockchain;
  * @author Horacio
  */
 public class Movimientos {
-    private Fecha metadato=new Fecha(1,1,1);
-    private double  valorCantidad;
+    Fecha metadato=new Fecha(22,2018,9);
+    double  valorCantidad;
     private int numeroMovimiento=0;
     Transacciones transaccion=new Transacciones();
-    Movimientos[] movimientosRealizados=new Movimientos [40] ; 
+    private Movimientos[] movimientosRealizados=new Movimientos [40] ; 
    
     public Movimientos() {
-        for (int i = 0; i < 40; i++) {
-         movimientosRealizados[i]=null;}
+      
     }
 
     public Movimientos[] getMovimientosRealizados() {
         return movimientosRealizados;
     }
 
-    public void setMovimientosRealizados(Movimientos[] movimientosRealizados) {
-        this.movimientosRealizados = movimientosRealizados;
+    public void setMovimientosRealizados(int a,Movimientos movimiento) {
+        this.movimientosRealizados[a] = movimiento;
     }
 
    public Fecha getMetadato() {
@@ -45,35 +44,47 @@ public class Movimientos {
         this.valorCantidad = valorCantidad;
     }
     
-    public void consignarCuenta(double saldoCuenta,double valorcatidad){
-        transaccion.Consignar(saldoCuenta, valorcatidad);
-        movimientosRealizados[numeroMovimiento].metadato=this.metadato;
-        movimientosRealizados[numeroMovimiento].valorCantidad=valorcatidad;
+    public double consignarCuenta(double saldoCuenta,double valorcatidad){
+       saldoCuenta=transaccion.Consignar(saldoCuenta, valorcatidad);
+        Movimientos movimientos=new Movimientos();
+        movimientos.metadato.setDia(this.metadato.getDia());
+        movimientos.metadato.setMes(this.metadato.getMes());
+         movimientos.metadato.setAno(this.metadato.getAno());
+        movimientos.valorCantidad=valorcatidad;
+         movimientos.transaccion.setCodigo(transaccion.getCodigo()); 
+        setMovimientosRealizados(numeroMovimiento,movimientos);
         int a=this.metadato.getDia();
         this.metadato.setDia(a++);
         if (this.metadato.getDia()>30){ a=this.metadato.getMes();
-            this.metadato.setMes(a++);this.metadato.setDia(0);
+            this.metadato.setMes(a++);this.metadato.setDia(1);
         }else{
             if(this.metadato.getMes()>12){
                  a=this.metadato.getAno();
-            this.metadato.setAno(a++);this.metadato.setMes(0);
+            this.metadato.setAno(a++);this.metadato.setMes(1);
             }numeroMovimiento++;
-        }}
+        }return saldoCuenta;
+    }
     
-    public void RetirarCuenta(double saldocuenta,double valorCantidad){
-        transaccion.Retirar(saldocuenta, valorCantidad);
-         movimientosRealizados[numeroMovimiento].metadato=this.metadato;
-        movimientosRealizados[numeroMovimiento].valorCantidad=valorCantidad;
-        int a=this.metadato.getDia();
-        this.metadato.setDia(a++);
-        if (this.metadato.getDia()>30){ a=this.metadato.getMes();
+    public double RetirarCuenta(double saldocuenta,double valorCantidad){
+       saldocuenta=transaccion.Retirar(saldocuenta, valorCantidad);
+       Movimientos movimientos=new Movimientos();
+       movimientos.metadato.setDia(this.metadato.getDia());
+        movimientos.metadato.setMes(this.metadato.getMes());
+         movimientos.metadato.setAno(this.metadato.getAno());
+       movimientos.valorCantidad=valorCantidad;
+       movimientos.transaccion.setCodigo(transaccion.getCodigo()); 
+       setMovimientosRealizados(numeroMovimiento,movimientos);
+       int a=this.metadato.getDia();
+       this.metadato.setDia(a++);
+       if (this.metadato.getDia()>30){ a=this.metadato.getMes();
             this.metadato.setMes(a++);this.metadato.setDia(0);
         }else{
-            if(this.metadato.getMes()>12){
+            if(this.metadato.getMes()>13){
                  a=this.metadato.getAno();
             this.metadato.setAno(a++);this.metadato.setMes(0);
             }numeroMovimiento++;
         }
+    return saldocuenta;
     }
     
  

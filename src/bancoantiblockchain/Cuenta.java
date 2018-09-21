@@ -10,23 +10,34 @@ package bancoantiblockchain;
  * @author Nicolas Muñoz Batista
  */
 public class Cuenta {
-private Fecha creacion;
+private Fecha creacion=new Fecha();
 private int numeroCuenta;
 private double saldo;
 private String Cliente;
-
+ private Movimientos movimiento;
     public Cuenta() {
-         Movimientos movimiento=new Movimientos();
+       movimiento=new Movimientos();
     }
 
-    public Cuenta(Fecha creacion, int numeroCuenta, double saldo, String Cliente) {
-       Movimientos movimiento=new Movimientos();
-       this.creacion = creacion;
+    public Cuenta(int diam,int mes,int ano, int numeroCuenta, double saldo, String Cliente) {
+       movimiento=new Movimientos();
+       this.creacion.setDia(diam);
+        this.creacion.setMes(mes);
+         this.creacion.setAno(ano);
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo;
         this.Cliente = Cliente;
     }
 
+    public Movimientos getMovimiento() {
+        return movimiento;
+    }
+
+    public void setMovimiento(Movimientos movimiento) {
+        this.movimiento = movimiento;
+    }
+
+    
     public Fecha getCreacion() {
         return creacion;
     }
@@ -58,7 +69,13 @@ private String Cliente;
         this.Cliente = Cliente;
     }
 
-
-
+ public void RetirarCuenta(double valorCantidad){
+     double a= movimiento.RetirarCuenta(this.saldo, valorCantidad);
+     this.saldo=a;
+    }
+public void CogsignarCuenta(double valorCantidad){
+   double a=movimiento.consignarCuenta(this.saldo, valorCantidad);
+     this.saldo=a;
+            }
 
 }

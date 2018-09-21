@@ -23,25 +23,30 @@ public class Transacciones {
         this.Codigo = Codigo;
     }
     
-    public boolean Consignar(double saldoCuenta, double valor){
+    public double Consignar(double saldoCuenta, double valor){
         if (valor>0){
+            System.out.println("Va a consignar un monto de "+valor);
             saldoCuenta+=valor;
             this.Codigo="BancoCogsignacion";
             this.Codigo+=numeroTransaccion;
             this.numeroTransaccion++;
-            return true;
-        }
-        return false;
+            System.out.println("Su nuevo saldo es "+saldoCuenta);
+            return saldoCuenta;
+        }System.out.println("no se pudo realizar la consignacion");
+        return saldoCuenta;
     }
-    public boolean Retirar(double saldoCuenta, double valor){
+    public double Retirar(double saldoCuenta, double valor){
         if(saldoCuenta-valor>=0){
-            saldoCuenta-=valor;
+            System.out.println("Va a retirar un monto de "+valor);    
+            double a=saldoCuenta-valor;
+            System.out.println("Su nuevo saldo es "+a);
             this.Codigo="BancoRetiro";
             this.Codigo+=numeroTransaccion;
             this.numeroTransaccion++;
-            return true;
-        }
-        return false;
+            
+            return a;
+        }System.out.println("no se pudo realizar el retiro");
+        return saldoCuenta;
     }
     
 }
